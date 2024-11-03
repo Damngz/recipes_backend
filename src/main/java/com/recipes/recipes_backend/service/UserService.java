@@ -17,16 +17,7 @@ public class UserService {
   @Autowired
   private PasswordEncoder passwordEncoder;
 
-  public User createUser(String name, String email, String password, String role) {
-    User user = new User();
-    user.setName(name);
-    user.setEmail(email);
-    user.setPassword(passwordEncoder.encode(password));
-    user.setRole(role);
-    return userRepository.save(user);
-  }
-
-  public Optional<User> geUserByEmail(String email) {
+  public Optional<User> getUserByEmail(String email) {
     return userRepository.findByEmail(email);
   }
 
