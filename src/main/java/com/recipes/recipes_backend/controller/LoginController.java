@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Slf4j
 @RestController
 @RequestMapping("/login")
-@CrossOrigin(origins = "http://localhost:8080")
 public class LoginController {
   @Autowired
   private UserService userService;
