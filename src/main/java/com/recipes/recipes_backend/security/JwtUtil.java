@@ -23,19 +23,27 @@ public class JwtUtil {
       .withIssuedAt(new Date())
       .withExpiresAt(new Date(System.currentTimeMillis() + expirationTime))
       .sign(Algorithm.HMAC256(secret));
-    }
+  }
 
-    public String extractEmail(String token) {
-      return JWT.decode(token).getSubject();
-    }
+  public String extractEmail(String token) {
+    return JWT.decode(token).getSubject();
+  }
 
-    public boolean validateToken(String token, String email) {
-      String extractedEmail = extractEmail(token);
-      return (extractedEmail.equals(email) && !isTokenExpired(token));
-    }
+  public boolean validateToken(String token, String email) {
+    String extractedEmail = extractEmail(token);
+    return (extractedEmail.equals(email) && !isTokenExpired(token));
+  }
 
-    private boolean isTokenExpired(String token) {
-      Date expiration = JWT.decode(token).getExpiresAt();
-      return expiration.before(new Date());
-    }
+  public boolean isTokenExpired(String token) {
+    Date expiration = JWT.decode(token).getExpiresAt();
+    return expiration.before(new Date());
+  }
+
+  public void setSecret(String secret) {
+    this.secret = secret;
+  }
+
+  public void setExpirationTime(long expirationTime) {
+    this.expirationTime = expirationTime;
+  }
 }
